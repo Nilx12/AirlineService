@@ -1,0 +1,31 @@
+package dao;
+
+import java.util.List;
+
+import entities.Pasazer;
+import entities.User;
+
+public interface UserService {
+	
+	public  List<Pasazer> getPassangers();
+	
+	public void savePassanger(Pasazer pasazer);
+	
+	public Pasazer getPassanger(int id);
+	
+	public  List<Pasazer> getPassangersByFirstName(String name);
+	
+	public  List<Pasazer> getPassangersByLastName(String name);
+	
+	public void deletePassanger(int id);
+	
+	public  List<User> getUsers();
+	
+	public void saveUser(User user);
+	
+	public User getUserById(int id);
+	
+	public User getUserByPassenger(int id);
+	
+	public void deleteUser(int id);
+}
