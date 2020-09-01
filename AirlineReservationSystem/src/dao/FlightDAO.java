@@ -1,20 +1,22 @@
 package dao;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import entities.Flight;
 
 public interface FlightDAO {
 	
-	public  List<Flight> getFlights();
+	public  List<Flight> getFlights(Date date);
 	
 	public void saveCrew(Flight flight);
 	
 	public Flight getFlightById(int id);
 	
-	public Flight getFlightByOriginAirport(int id);
+	public Flight getFlightByOriginAirport(int id,Date date);
 	
-	public Flight getFlightByDesitinyAirport(int id);
+	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityi,Date date);
 	
 	public Flight getFlightByAirline(int id);
 	

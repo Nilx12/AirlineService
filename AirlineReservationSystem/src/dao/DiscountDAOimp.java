@@ -32,8 +32,6 @@ public class DiscountDAOimp implements DiscountDAO {
 			discounts = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return discounts;
 	}
@@ -47,8 +45,6 @@ public class DiscountDAOimp implements DiscountDAO {
 			session.saveOrUpdate(discount);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -61,8 +57,6 @@ public class DiscountDAOimp implements DiscountDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			disocunt = null;
-		}finally {
-			session.close();
 		}
 		return disocunt;
 	}
@@ -79,8 +73,6 @@ public class DiscountDAOimp implements DiscountDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 

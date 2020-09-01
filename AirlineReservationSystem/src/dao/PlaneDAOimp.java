@@ -32,9 +32,9 @@ public class PlaneDAOimp implements PlaneDAO {
 			planes = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
+		
+		
 		return planes;
 	}
 
@@ -61,9 +61,8 @@ public class PlaneDAOimp implements PlaneDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			plane = null;
-		}finally {
-			session.close();
 		}
+		
 		return plane;
 	}
 
@@ -79,8 +78,6 @@ public class PlaneDAOimp implements PlaneDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -101,8 +98,6 @@ public class PlaneDAOimp implements PlaneDAO {
 			e.printStackTrace();
 			planes = null;
 			
-		}finally {
-			session.close();
 		}
 		
 		return planes;

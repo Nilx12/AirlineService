@@ -32,8 +32,6 @@ public class ClassDAOimp implements ClassDAO {
 			
 			classes = null;
 			
-		}finally {
-			session.close();
 		}
 		return classes;
 	}
@@ -47,8 +45,6 @@ public class ClassDAOimp implements ClassDAO {
 			session.saveOrUpdate(klasa);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -62,8 +58,6 @@ public class ClassDAOimp implements ClassDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			klas = null;
-		}finally {
-			session.close();
 		}
 		return klas;
 	}
@@ -79,8 +73,6 @@ public class ClassDAOimp implements ClassDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 

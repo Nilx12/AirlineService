@@ -32,8 +32,6 @@ public class AirportDAOimp implements AirportDAO {
 			
 			airports = null;
 			
-		}finally {
-			session.close();
 		}
 		
 	return airports;
@@ -47,8 +45,6 @@ public class AirportDAOimp implements AirportDAO {
 			session.saveOrUpdate(airport);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -65,8 +61,6 @@ public class AirportDAOimp implements AirportDAO {
 			
 			airport = null;
 			
-		}finally {
-			session.close();
 		}
 		return airport;
 	}
@@ -88,8 +82,6 @@ public class AirportDAOimp implements AirportDAO {
 			e.printStackTrace();
 			airports = null;
 			
-		}finally {
-			session.close();
 		}
 		
 		return airports;
@@ -107,8 +99,6 @@ public class AirportDAOimp implements AirportDAO {
 			
 				e.printStackTrace();
 				
-		}finally {
-			session.close();
 		}
 	}
 

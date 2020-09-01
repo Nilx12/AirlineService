@@ -32,8 +32,6 @@ public class ManufacturerDAOimp implements ManufacturerDAO {
 			manufacturers = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return manufacturers;
 	}
@@ -46,8 +44,6 @@ public class ManufacturerDAOimp implements ManufacturerDAO {
 			session.saveOrUpdate(manufacturer);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -61,8 +57,6 @@ public class ManufacturerDAOimp implements ManufacturerDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			manufacturer = null;
-		}finally {
-			session.close();
 		}
 		return manufacturer;
 	}
@@ -78,8 +72,6 @@ public class ManufacturerDAOimp implements ManufacturerDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

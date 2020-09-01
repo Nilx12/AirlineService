@@ -31,8 +31,6 @@ public class PassangerDAOimp implements PassangerDAO {
 			pasazers = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return pasazers;
 	}
@@ -45,8 +43,6 @@ public class PassangerDAOimp implements PassangerDAO {
 			session.saveOrUpdate(pasazer);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -59,8 +55,6 @@ public class PassangerDAOimp implements PassangerDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			pasazer = null;
-		}finally {
-			session.close();
 		}
 		return pasazer;
 	}
@@ -76,8 +70,6 @@ public class PassangerDAOimp implements PassangerDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -96,8 +88,6 @@ public class PassangerDAOimp implements PassangerDAO {
 			pasazers = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return pasazers;
 	}
@@ -117,8 +107,6 @@ public class PassangerDAOimp implements PassangerDAO {
 			pasazers = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return pasazers;
 	}

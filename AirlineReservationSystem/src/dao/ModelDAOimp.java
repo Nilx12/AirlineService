@@ -31,8 +31,6 @@ public class ModelDAOimp implements ModelDAO {
 			models = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return models;
 	}
@@ -45,8 +43,6 @@ public class ModelDAOimp implements ModelDAO {
 			session.saveOrUpdate(model);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -60,8 +56,6 @@ public class ModelDAOimp implements ModelDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			model = null;
-		}finally {
-			session.close();
 		}
 		return model;
 	}
@@ -77,8 +71,6 @@ public class ModelDAOimp implements ModelDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -94,8 +86,6 @@ public class ModelDAOimp implements ModelDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			model = null;
-		}finally {
-			session.close();
 		}
 		return model;
 		
@@ -116,8 +106,6 @@ public class ModelDAOimp implements ModelDAO {
 			models = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return models;
 	}

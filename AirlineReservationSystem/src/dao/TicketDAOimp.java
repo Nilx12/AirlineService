@@ -31,8 +31,6 @@ public class TicketDAOimp implements TicketDAO {
 			tickets = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return tickets;
 	}
@@ -46,8 +44,6 @@ public class TicketDAOimp implements TicketDAO {
 			session.saveOrUpdate(ticket);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -61,8 +57,6 @@ public class TicketDAOimp implements TicketDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			ticket = null;
-		}finally {
-			session.close();
 		}
 		return ticket;
 	}
@@ -78,8 +72,6 @@ public class TicketDAOimp implements TicketDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			tickets = null;
-		}finally {
-			session.close();
 		}
 		return tickets;
 		
@@ -96,8 +88,6 @@ public class TicketDAOimp implements TicketDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

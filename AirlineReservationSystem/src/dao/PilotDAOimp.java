@@ -31,8 +31,6 @@ public class PilotDAOimp implements PilotDAO {
 			pilots = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return pilots;
 	}
@@ -45,8 +43,6 @@ public class PilotDAOimp implements PilotDAO {
 			session.saveOrUpdate(pilot);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -61,8 +57,6 @@ public class PilotDAOimp implements PilotDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			pilot = null;
-		}finally {
-			session.close();
 		}
 		return pilot;
 	}
@@ -78,8 +72,6 @@ public class PilotDAOimp implements PilotDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

@@ -31,8 +31,6 @@ public class CrewDAOimp implements CrewDAO {
 			crews = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return crews;
 	}
@@ -46,8 +44,6 @@ public class CrewDAOimp implements CrewDAO {
 			session.saveOrUpdate(crew);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -63,8 +59,6 @@ public class CrewDAOimp implements CrewDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			crew = null;
-		}finally {
-			session.close();
 		}
 		return crew;
 	}
@@ -78,8 +72,6 @@ public class CrewDAOimp implements CrewDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			crew = null;
-		}finally {
-			session.close();
 		}
 		return crew;
 	}
@@ -96,8 +88,6 @@ public class CrewDAOimp implements CrewDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 

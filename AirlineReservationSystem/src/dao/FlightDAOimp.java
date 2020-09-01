@@ -1,5 +1,7 @@
 package dao;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,13 +21,12 @@ public class FlightDAOimp implements FlightDAO {
 	SessionFactory sessionFactory;
 	
 	@Override
-	public List<Flight> getFlights() {
+	public List<Flight> getFlights(Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		List<Flight> flight;
 		try {
-			
-			Query<Flight> query = session.createQuery("from Flight",Flight.class);
-			
+			Query<Flight> query = session.createQuery("from Flight where TakeOfDate = :data",Flight.class);
+			query.setParameter("data",date);
 			flight = query.getResultList();
 			
 		}catch(Exception e){
@@ -33,8 +34,6 @@ public class FlightDAOimp implements FlightDAO {
 			flight = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return flight;
 	}
@@ -47,8 +46,6 @@ public class FlightDAOimp implements FlightDAO {
 			session.saveOrUpdate(flight);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -62,8 +59,6 @@ public class FlightDAOimp implements FlightDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			flight = null;
-		}finally {
-			session.close();
 		}
 		return flight;
 	}
@@ -79,46 +74,45 @@ public class FlightDAOimp implements FlightDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
 
 	@Override
-	public Flight getFlightByOriginAirport(int id) {
+	public Flight getFlightByOriginAirport(int id,Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Flight flight;
 		try {
-			Query<Flight> query = session.createQuery("from Flight where origin_airport_id=:fid",Flight.class);
+			Query<Flight> query = session.createQuery("from Flight where origin_airport_id=:fid and TakeOfDate = :data",Flight.class);
+			query.setParameter("data",date);
 			query.setParameter("fid", id);
 			flight = query.getSingleResult();
 		}catch(Exception e){
 			e.printStackTrace();
 			flight = null;
-		}finally {
-			session.close();
 		}
 		return flight;
 	}
 
 	@Override
-	public Flight getFlightByDesitinyAirport(int id) {
+	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date) {
 		Session session = sessionFactory.getCurrentSession();
-		Flight flight;
+		List<Flight> flights;
 		try {
-			Query<Flight> query = session.createQuery("from Flight where desitiny_airport_id=:fid",Flight.class);
-			query.setParameter("fid", id);
-			flight = query.getSingleResult();
+			Query<Flight> query = session.createQuery("from Flight where origin_airport_id=:oid and desitiny_airport_id=:did and TakeOfDate = :data",Flight.class);
+			query.setParameter("data",date);
+			query.setParameter("oid", originId);
+			query.setParameter("did", desitnityid);
+			flights = query.getResultList();
 		}catch(Exception e){
 			e.printStackTrace();
-			flight = null;
-		}finally {
-			session.close();
+			flights = null;
 		}
-		return flight;
+		return flights;
 	}
-
+	
+	
+	
 	@Override
 	public Flight getFlightByAirline(int id) {
 		Session session = sessionFactory.getCurrentSession();
@@ -130,8 +124,6 @@ public class FlightDAOimp implements FlightDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			flight = null;
-		}finally {
-			session.close();
 		}
 		return flight;
 	}

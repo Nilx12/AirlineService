@@ -1,6 +1,8 @@
 package entities;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,10 @@ public class Flight {
 	private int id;
 	
 	@Column(name="TakeOfDate")
-	private Timestamp takeOfDate;
+	private Date date;
+	
+	@Column(name="TakeOfTime")
+	private LocalTime time;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,
 			CascadeType.DETACH,CascadeType.REFRESH})
@@ -110,14 +115,6 @@ public class Flight {
 		this.desitinyAirport = desitinyAirport;
 	}
 
-	public Timestamp getTakeOfDate() {
-		return takeOfDate;
-	}
-
-	public void setTakeOfDate(Timestamp takeOfDate) {
-		this.takeOfDate = takeOfDate;
-	}
-
 	public List<Class> getClasses() {
 		return classes;
 	}
@@ -133,17 +130,37 @@ public class Flight {
 		classes.add(klasa);
 	}
 	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
 	public Flight() {
 		
 	}
 
-	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,Timestamp takeOfDate) {
+	
+	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,Date date,LocalTime time) {
 		this.plane = plane;
 		this.airline = airline;
 		this.crew = crew;
 		this.originAirport = originAirport;
 		this.desitinyAirport = desitinyAirport;
-		this.takeOfDate = takeOfDate;
+		this.date = date;
+		this.time = time;
+
 	}
 	
 }

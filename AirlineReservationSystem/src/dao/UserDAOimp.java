@@ -32,8 +32,6 @@ public class UserDAOimp implements UserDAO {
 			users = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return users;
 	}
@@ -47,8 +45,6 @@ public class UserDAOimp implements UserDAO {
 			session.saveOrUpdate(user);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -62,8 +58,6 @@ public class UserDAOimp implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			user = null;
-		}finally {
-			session.close();
 		}
 		return user;
 	}
@@ -79,8 +73,6 @@ public class UserDAOimp implements UserDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			user = null;
-		}finally {
-			session.close();
 		}
 		return user;
 		
@@ -97,8 +89,6 @@ public class UserDAOimp implements UserDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

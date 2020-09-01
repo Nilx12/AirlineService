@@ -32,8 +32,6 @@ public class AirlineDAOimpl implements AirlineDAO {
 			e.printStackTrace();
 			airlines = null;
 			
-		}finally {
-			session.close();
 		}
 		
 		return airlines;
@@ -47,8 +45,6 @@ public class AirlineDAOimpl implements AirlineDAO {
 			session.saveOrUpdate(airline);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 	}
 
@@ -63,8 +59,6 @@ public class AirlineDAOimpl implements AirlineDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			airline = null;
-		}finally {
-			session.close();
 		}
 		return airline;
 	}
@@ -86,8 +80,6 @@ public class AirlineDAOimpl implements AirlineDAO {
 			e.printStackTrace();
 			airlines = null;
 			
-		}finally {
-			session.close();
 		}
 		
 		return airlines;
@@ -103,8 +95,6 @@ public class AirlineDAOimpl implements AirlineDAO {
 			session.delete(airline);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		
 	}

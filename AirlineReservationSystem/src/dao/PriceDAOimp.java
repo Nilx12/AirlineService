@@ -32,8 +32,6 @@ public class PriceDAOimp implements PriceDAO {
 			prices = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return prices;
 	}
@@ -47,8 +45,6 @@ public class PriceDAOimp implements PriceDAO {
 			session.saveOrUpdate(price);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -62,8 +58,6 @@ public class PriceDAOimp implements PriceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			price = null;
-		}finally {
-			session.close();
 		}
 		return price;
 	}
@@ -79,8 +73,6 @@ public class PriceDAOimp implements PriceDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			prices = null;
-		}finally {
-			session.close();
 		}
 		return prices;
 	}
@@ -96,8 +88,6 @@ public class PriceDAOimp implements PriceDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

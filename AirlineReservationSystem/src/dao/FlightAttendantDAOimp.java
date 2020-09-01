@@ -32,8 +32,6 @@ public class FlightAttendantDAOimp implements FlightAttendantDAO {
 			flightAttendants = null;
 			
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 		return flightAttendants;
 	}
@@ -46,8 +44,6 @@ public class FlightAttendantDAOimp implements FlightAttendantDAO {
 			session.saveOrUpdate(flightAttendant);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}
@@ -61,8 +57,6 @@ public class FlightAttendantDAOimp implements FlightAttendantDAO {
 		}catch(Exception e){
 			e.printStackTrace();
 			flightAttendant = null;
-		}finally {
-			session.close();
 		}
 		return flightAttendant;
 	}
@@ -78,8 +72,6 @@ public class FlightAttendantDAOimp implements FlightAttendantDAO {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

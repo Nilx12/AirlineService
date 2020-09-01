@@ -1,5 +1,9 @@
 package dao;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +20,8 @@ public class FlightServiceimp implements FlightService {
 	
 	@Override
 	@Transactional
-	public List<Flight> getFlights() {
-		return flightDAO.getFlights();
+	public List<Flight>  getFlights(Date date) {
+		return flightDAO.getFlights(date);
 	}
 
 	@Override
@@ -30,20 +34,41 @@ public class FlightServiceimp implements FlightService {
 	@Override
 	@Transactional
 	public Flight getFlightById(int id) {
-
+		
 		return flightDAO.getFlightById(id);
 	}
 
 	@Override
 	@Transactional
-	public Flight getFlightByOriginAirport(int id) {
-		return flightDAO.getFlightByOriginAirport(id);
+	public Flight getFlightByOriginAirport(int id,Date date) {
+		return flightDAO.getFlightByOriginAirport(id,date);
 	}
 
 	@Override
 	@Transactional
-	public Flight getFlightByDesitinyAirport(int id) {
-		return flightDAO.getFlightByDesitinyAirport(id);
+	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date, LocalTime time) {
+		
+		LocalTime minTime = time;
+		minTime.minusHours(5);
+		
+		LocalTime maxTime = time;
+		minTime.plusHours(5);
+		
+		List<Flight> flights = flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
+		
+		List<Flight> flightsByDate = new ArrayList<Flight>();		
+		
+		flights.stream()
+			.filter(flight -> flight.getTime().isAfter(minTime) && flight.getTime().isBefore(maxTime))
+			.forEach(flight -> flightsByDate.add(flight));
+		
+		return flights;
+	}
+	
+	@Override
+	@Transactional
+	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date) {
+		return flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
 	}
 
 	@Override
