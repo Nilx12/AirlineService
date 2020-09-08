@@ -46,8 +46,6 @@ public class PlaneDAOimp implements PlaneDAO {
 			session.saveOrUpdate(plane);
 		}catch(Exception e){
 			e.printStackTrace();
-		}finally {
-			session.close();
 		}
 
 	}

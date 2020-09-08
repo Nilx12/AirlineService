@@ -18,6 +18,8 @@ public interface FlightDAO {
 	
 	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityi,Date date);
 	
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date);
+	
 	public Flight getFlightByAirline(int id);
 	
 	public void deleteFlight(int id);

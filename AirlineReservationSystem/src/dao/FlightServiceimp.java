@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,15 +56,76 @@ public class FlightServiceimp implements FlightService {
 		LocalTime maxTime = time;
 		minTime.plusHours(5);
 		
-		List<Flight> flights = flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
 		
-		List<Flight> flightsByDate = new ArrayList<Flight>();		
+		List<Flight> flightsByDate =flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date)
+				.stream()
+				.filter(flight -> flight.getTime().isAfter(minTime) && flight.getTime().isBefore(maxTime))
+				.collect(Collectors.toList());
 		
-		flights.stream()
+		
+		return flightsByDate;
+	}
+	
+	@Override
+	@Transactional
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date, LocalTime time){
+		
+		LocalTime minTime = time.minusHours(5);
+		LocalTime maxTime = time.plusHours(5);
+		
+		Calendar calendar = Calendar.getInstance(); 
+		List<Flight> flightsByDate = flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
+	
+		if(maxTime.isBefore(time)) {
+			calendar.setTime(date); 
+			calendar.add(Calendar.DATE, 1);
+			Date NextDay = new Date(calendar.getTime().getTime());
+			
+			flightsByDate = flightsByDate
+					.stream()
+					.filter(flight -> flight.getTime().isAfter(minTime))
+					.collect(Collectors.toList());
+			
+			flightsByDate.addAll(flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,NextDay)
+					.stream()
+					.filter(flight -> flight.getTime().isBefore(maxTime))
+					.collect(Collectors.toList())
+				);
+		} 
+		
+		if(minTime.isAfter(time)) {
+			calendar.setTime(date); 
+			calendar.add(Calendar.DATE, -1);
+			Date PrevDay = new Date(calendar.getTime().getTime());
+			
+			flightsByDate = flightsByDate
+					.stream()
+					.filter(flight -> flight.getTime().isBefore(maxTime))
+					.collect(Collectors.toList());
+			
+			flightsByDate.addAll(flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,PrevDay)
+					.stream()
+					.filter(flight -> flight.getTime().isAfter(minTime))
+					.collect(Collectors.toList())
+				);
+		}
+		
+		if(minTime.isBefore(time) && maxTime.isAfter(time)){
+			flightsByDate = flightsByDate
+			.stream()
 			.filter(flight -> flight.getTime().isAfter(minTime) && flight.getTime().isBefore(maxTime))
-			.forEach(flight -> flightsByDate.add(flight));
+			.collect(Collectors.toList());
+		}
+		return flightsByDate;
+	}
+	
+	@Override
+	@Transactional
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date){
 		
-		return flights;
+		List<Flight> flightsByDate =flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
+
+		return flightsByDate;
 	}
 	
 	@Override

@@ -45,6 +45,36 @@ public class AirportServiceimp implements AirportService {
 
 	@Override
 	@Transactional
+	public Airport getAirportByName(String name) {
+		if(name == null) {
+			return null;
+		}
+		
+		List<Airport> airports = airportDAO.getAirportsByName(name.trim());
+		
+		if(airports.size() == 0)
+			return null;
+		Airport airprot = airports.get(0);
+		return airprot;
+	}
+	
+	@Override
+	@Transactional
+	public List<Integer> getAirportsIdsByName(String name){
+		
+		if(name == null) {
+			return null;
+		}
+		
+		List<Integer> airports = airportDAO.getAirportsIdsByName(name.trim());
+		
+		if(airports.size() == 0)
+			return null;
+		return airports;
+	}
+	
+	@Override
+	@Transactional
 	public void deleteAirport(int id) {
 		airportDAO.deleteAirport(id);
 

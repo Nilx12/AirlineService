@@ -14,5 +14,7 @@ public interface AirportDAO {
 
 	public List<Airport> getAirportsByName(String name);
 	
+	public List<Integer> getAirportsIdsByName(String name);
+	
 	public void deleteAirport(int id);
 }

@@ -19,6 +19,10 @@ public interface FlightService {
 
 	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date,LocalTime time);
 	
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date);
+	
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date, LocalTime time);
+	
 	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date);
 	
 	public Flight getFlightByAirline(int id);

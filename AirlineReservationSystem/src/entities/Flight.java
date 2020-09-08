@@ -30,7 +30,7 @@ public class Flight {
 	private int id;
 	
 	@Column(name="TakeOfDate")
-	private Date date;
+	private java.util.Date date;
 	
 	@Column(name="TakeOfTime")
 	private LocalTime time;
@@ -131,7 +131,7 @@ public class Flight {
 	}
 	
 
-	public Date getDate() {
+	public java.util.Date getDate() {
 		return date;
 	}
 
@@ -147,12 +147,13 @@ public class Flight {
 		this.time = time;
 	}
 
+
+	
 	public Flight() {
 		
 	}
 
-	
-	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,Date date,LocalTime time) {
+	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,java.util.Date date,LocalTime time) {
 		this.plane = plane;
 		this.airline = airline;
 		this.crew = crew;

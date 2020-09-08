@@ -102,4 +102,24 @@ public class AirportDAOimp implements AirportDAO {
 		}
 	}
 
+	@Override
+	public List<Integer> getAirportsIdsByName(String name) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Integer> airports;
+		try {
+			
+			Query<Integer> query = session.createQuery("select id from Airport where name like :name",Integer.class);
+			query.setParameter("name", "%" + name);
+			
+			airports = query.getResultList();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			airports = null;
+			
+		}
+		return airports;
+	}
+
 }

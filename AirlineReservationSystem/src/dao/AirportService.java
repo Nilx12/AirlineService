@@ -14,5 +14,9 @@ public interface AirportService {
 
 	public List<Airport> getAirportsByName(String name);
 	
+	public Airport getAirportByName(String name);
+	
+	public List<Integer> getAirportsIdsByName(String name);
+	
 	public void deleteAirport(int id);
 }

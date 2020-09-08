@@ -111,7 +111,22 @@ public class FlightDAOimp implements FlightDAO {
 		return flights;
 	}
 	
-	
+	@Override
+	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Flight> flights;
+		try {
+			Query<Flight> query = session.createQuery("from Flight where origin_airport_id IN :oid and desitiny_airport_id IN :did and TakeOfDate = :data",Flight.class);
+			query.setParameter("data",date);
+			query.setParameter("oid", originId);
+			query.setParameter("did", desitnityid);
+			flights = query.getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			flights = null;
+		}
+		return flights;
+	}
 	
 	@Override
 	public Flight getFlightByAirline(int id) {
