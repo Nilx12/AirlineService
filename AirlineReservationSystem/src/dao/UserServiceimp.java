@@ -1,5 +1,6 @@
 package dao;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,8 @@ public class UserServiceimp implements UserService {
 		return userDAO.getUsers();
 	}
 
+	
+	
 	@Override
 	@Transactional
 	public void saveUser(User user) {
@@ -89,11 +92,45 @@ public class UserServiceimp implements UserService {
 		return userDAO.getUserByPassenger(id);
 	}
 
+
+	@Override
+	@Transactional
+	public Boolean registerUser(User user) {
+		
+		if(getUserByLogin(user.getLogin()) != null) {
+			return false;
+		}
+		
+		//TODO: create passsword hasing function 
+		
+		saveUser(user);
+		
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public Boolean loginUser(User user, String password) {
+		
+		//TODO: create password validation 
+		
+		return true;
+	}
+
+
+	@Override
+	@Transactional
+	public User getUserByLogin(String login) {
+		if(login == null)
+			return null;
+		
+		return userDAO.getUserByLogin(login);
+	}
+
 	@Override
 	@Transactional
 	public void deleteUser(int id) {
 		userDAO.deleteUser(id);
 
 	}
-
 }

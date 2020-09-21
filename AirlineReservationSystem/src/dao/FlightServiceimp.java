@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import entities.Flight;
+import entities.Class;
 
 @Service
 public class FlightServiceimp implements FlightService {
@@ -20,11 +21,35 @@ public class FlightServiceimp implements FlightService {
 	@Autowired
 	FlightDAO flightDAO;
 	
+	List<Class> flist;
+	
+	@Override
+	@Transactional
+	public void sFlist(int id){
+		if(flist == null) {
+			flist = new ArrayList<Class>();
+		}else {
+			flist.clear();
+		}
+		Flight flight = getFlightById(id);
+		for(Class klasy:flight.getClasses()) {
+			System.out.println(klasy.getName());
+			flist.add(klasy);
+		}
+	}
+	
+	@Override
+	public List<Class> gFlist(){
+		return flist;
+		
+	}
+	
 	@Override
 	@Transactional
 	public List<Flight>  getFlights(Date date) {
 		return flightDAO.getFlights(date);
 	}
+
 
 	@Override
 	@Transactional
@@ -32,7 +57,8 @@ public class FlightServiceimp implements FlightService {
 		flightDAO.saveCrew(flight);
 
 	}
-
+	
+	
 	@Override
 	@Transactional
 	public Flight getFlightById(int id) {
@@ -61,7 +87,7 @@ public class FlightServiceimp implements FlightService {
 				.stream()
 				.filter(flight -> flight.getTime().isAfter(minTime) && flight.getTime().isBefore(maxTime))
 				.collect(Collectors.toList());
-		
+
 		
 		return flightsByDate;
 	}
@@ -116,6 +142,8 @@ public class FlightServiceimp implements FlightService {
 			.filter(flight -> flight.getTime().isAfter(minTime) && flight.getTime().isBefore(maxTime))
 			.collect(Collectors.toList());
 		}
+		
+		
 		return flightsByDate;
 	}
 	
@@ -123,8 +151,10 @@ public class FlightServiceimp implements FlightService {
 	@Transactional
 	public List<Flight> getFlightByDesitinyAndOriginAirport(List<Integer> originId,List<Integer> desitnityid,Date date){
 		
-		List<Flight> flightsByDate =flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
-
+		List<Flight> flightsByDate = flightDAO.getFlightByDesitinyAndOriginAirport( originId, desitnityid,date);
+		
+		
+		
 		return flightsByDate;
 	}
 	

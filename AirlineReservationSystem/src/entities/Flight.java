@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,14 @@ public class Flight {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="TakeOfDate")
+	@Column(name="takeOfDate")
 	private java.util.Date date;
 	
-	@Column(name="TakeOfTime")
+	@Column(name="takeOfTime")
 	private LocalTime time;
+	
+	@Column(name="landing")
+	private LocalTime landing;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,
 			CascadeType.DETACH,CascadeType.REFRESH})
@@ -59,6 +63,7 @@ public class Flight {
 	@JoinColumn(name="desitiny_airport_id")
 	private Airport desitinyAirport;
 
+
 	@ManyToMany(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
 			CascadeType.DETACH,CascadeType.REFRESH})
 	@JoinTable(name="operated_classes",
@@ -66,6 +71,7 @@ public class Flight {
 			inverseJoinColumns=@JoinColumn(name="class_id")
 			)
 	private List<Class> classes;
+
 	
 	public int getId() {
 		return id;
@@ -115,7 +121,7 @@ public class Flight {
 		this.desitinyAirport = desitinyAirport;
 	}
 
-	public List<Class> getClasses() {
+	public List<entities.Class> getClasses() {
 		return classes;
 	}
 
@@ -147,13 +153,24 @@ public class Flight {
 		this.time = time;
 	}
 
+	
+	public LocalTime getLanding() {
+		return landing;
+	}
 
+	public void setLanding(LocalTime landing) {
+		this.landing = landing;
+	}
+
+	public Duration  timeDifference() {
+		return Duration.between(time, landing);
+	}
 	
 	public Flight() {
 		
 	}
 
-	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,java.util.Date date,LocalTime time) {
+	public Flight(Plane plane, Airline airline, Crew crew, Airport originAirport, Airport desitinyAirport,java.util.Date date,LocalTime time,LocalTime landing) {
 		this.plane = plane;
 		this.airline = airline;
 		this.crew = crew;
@@ -161,6 +178,7 @@ public class Flight {
 		this.desitinyAirport = desitinyAirport;
 		this.date = date;
 		this.time = time;
+		this.landing = landing;
 
 	}
 	

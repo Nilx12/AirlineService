@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import entities.Airline;
+import entities.Plane;
 
 public interface AirlineService {
 	
@@ -16,5 +17,7 @@ public interface AirlineService {
 	
 	public void deleteAirline(int id);
 	
+	public void sPlist(int id);
 	
+	public List<Plane>  gPlist();
 }

@@ -23,7 +23,13 @@ public interface UserService {
 	
 	public void saveUser(User user);
 	
+	public Boolean registerUser(User user);
+	
+	public Boolean loginUser(User user,String password);
+	
 	public User getUserById(int id);
+	
+	public User getUserByLogin(String login);
 	
 	public User getUserByPassenger(int id);
 	

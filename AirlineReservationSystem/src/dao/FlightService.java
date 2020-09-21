@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.util.List;
 
+import entities.Class;
 import entities.Flight;
 
 public interface FlightService {
@@ -26,6 +27,10 @@ public interface FlightService {
 	public List<Flight> getFlightByDesitinyAndOriginAirport(int originId,int desitnityid,Date date);
 	
 	public Flight getFlightByAirline(int id);
+	
+	public void sFlist(int index);
+	
+	public  List<Class> gFlist();
 	
 	public void deleteFlight(int id);
 }

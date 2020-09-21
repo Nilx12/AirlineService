@@ -63,6 +63,21 @@ public class UserDAOimp implements UserDAO {
 	}
 	
 	@Override
+	public User getUserByLogin(String login) {
+		Session session = sessionFactory.getCurrentSession();
+		User user;
+		try {
+			Query<User> query = session.createQuery("from User where login=:login",User.class);
+			query.setParameter("login", login);
+			user = query.getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			user = null;
+		}
+		return user;
+	}
+	
+	@Override
 	public User getUserByPassenger(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		User user;
@@ -78,6 +93,7 @@ public class UserDAOimp implements UserDAO {
 		
 	}
 
+	
 	@Override
 	public void deleteUser(int id) {
 		Session session = sessionFactory.getCurrentSession();
@@ -92,5 +108,6 @@ public class UserDAOimp implements UserDAO {
 		}
 
 	}
+
 
 }

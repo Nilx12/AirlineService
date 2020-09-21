@@ -1,11 +1,15 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import entities.Class;
+import entities.Flight;
+import entities.Pasazer;
 import entities.Ticket;
 
 @Service
@@ -13,6 +17,50 @@ public class TicketServiceimp implements TicketService {
 
 	@Autowired
 	TicketDAO ticketDAO;
+
+	List<Flight> flist;
+	
+	List<Pasazer> plist;
+	
+	@Override
+	@Transactional
+	public void sFlist(int id) {
+		if(flist == null) {
+			flist = new ArrayList<Flight>();
+		}else {
+			flist.clear();
+		}
+		Ticket ticket = getTicketById(id);
+		for(Flight flight:ticket.getlights() ) {
+			flist.add(flight);
+		}
+	}
+	
+	@Override
+	public List<Flight> gFlist(){
+		return flist;
+		
+	}
+	
+	@Override
+	@Transactional
+	public void sPlist(int id) {
+		if(plist == null) {
+			plist = new ArrayList<Pasazer>();
+		}else {
+			flist.clear();
+		}
+		Ticket ticket = getTicketById(id);
+		for(Pasazer pas:ticket.getPassangers() ) {
+			plist.add(pas);
+		}
+	}
+	
+	@Override
+	public List<Pasazer> gPlist(){
+		return plist;
+		
+	}
 	
 	@Override
 	@Transactional
