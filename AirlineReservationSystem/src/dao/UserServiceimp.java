@@ -4,6 +4,8 @@ import java.security.SecureRandom;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,9 @@ import entities.User;
 
 @Service
 public class UserServiceimp implements UserService {
-
+	
+	/*@Autowired
+	PasswordEncoder PasswordEncoder;*/
 	
 	@Autowired
 	PassangerDAO passangerDAO;
@@ -27,6 +31,7 @@ public class UserServiceimp implements UserService {
 		return passangerDAO.getPassangers();
 	}
 
+	
 	@Override
 	@Transactional
 	public void savePassanger(Pasazer pasazer) {
@@ -101,7 +106,13 @@ public class UserServiceimp implements UserService {
 			return false;
 		}
 		
-		//TODO: create passsword hasing function 
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextBytes(salt);
+		
+		BCryptPasswordEncoder bc = new BCryptPasswordEncoder(32,random);
+		
+		user.setPassword(bc.encode(user.getPassword()));
 		
 		saveUser(user);
 		
@@ -110,11 +121,14 @@ public class UserServiceimp implements UserService {
 
 	@Override
 	@Transactional
-	public Boolean loginUser(User user, String password) {
+	public Boolean loginUser(User user, String password) {	
+		SecureRandom random = new SecureRandom();
+		byte[] salt = new byte[16];
+		random.nextBytes(salt);
 		
-		//TODO: create password validation 
+		BCryptPasswordEncoder bc = new BCryptPasswordEncoder(32,random);
 		
-		return true;
+		return bc.matches(user.getPassword(), password);
 	}
 
 

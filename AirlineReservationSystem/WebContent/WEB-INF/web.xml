@@ -17,7 +17,21 @@
       <param-value>/WEB-INF/springAirlineReservationSystem.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+  
   </servlet>
+  
+
+<context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+</context-param>
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>com.packtpub.learnvaadin.springintegration.SpringIntegrationConfiguration</param-value>
+</context-param>
+
+  
+  
   
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>

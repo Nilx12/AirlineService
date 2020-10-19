@@ -16,6 +16,12 @@ public class UserController {
 	public String loginUserPage(){
 		return "loginPage";
 	}
+	
+	@RequestMapping("/processLogin")
+	public String processLogin(){
+		return "loginPage";
+	}
+	
 	@RequestMapping("/register")
 	public String registerUSerPage(){
 		return "registerPage";
