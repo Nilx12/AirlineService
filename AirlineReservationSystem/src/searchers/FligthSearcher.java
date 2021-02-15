@@ -4,16 +4,19 @@ import java.time.LocalTime;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import validation.CheckTimeFormat;
 
 
 public class FligthSearcher {
 	
-	@NotNull(message="necesary")
+	@NotNull(message = "pole wymagane")
+	@Size(min=1,message="pole wymagane")
 	private String originAirport;
 	
-	@NotNull(message="necesary")
+	@NotNull(message = "pole wymagane")
+	@Size(min=1,message="pole wymagane")
 	private String desitinyAirport;
 	
 	@CheckTimeFormat

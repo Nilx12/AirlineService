@@ -1,5 +1,6 @@
 package dao;
 
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
 
@@ -102,18 +103,6 @@ public class UserServiceimp implements UserService {
 	@Transactional
 	public Boolean registerUser(User user) {
 		
-		if(getUserByLogin(user.getLogin()) != null) {
-			return false;
-		}
-		
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		
-		BCryptPasswordEncoder bc = new BCryptPasswordEncoder(32,random);
-		
-		user.setPassword(bc.encode(user.getPassword()));
-		
 		saveUser(user);
 		
 		return null;
@@ -121,21 +110,16 @@ public class UserServiceimp implements UserService {
 
 	@Override
 	@Transactional
-	public Boolean loginUser(User user, String password) {	
-		SecureRandom random = new SecureRandom();
-		byte[] salt = new byte[16];
-		random.nextBytes(salt);
-		
-		BCryptPasswordEncoder bc = new BCryptPasswordEncoder(32,random);
-		
-		return bc.matches(user.getPassword(), password);
+	public Boolean loginUser(User user, String password) throws NoSuchAlgorithmException {	
+
+		return user.proceedPassword(password);
 	}
 
 
 	@Override
 	@Transactional
 	public User getUserByLogin(String login) {
-		if(login == null)
+		if(login == null || login.equals(""))
 			return null;
 		
 		return userDAO.getUserByLogin(login);

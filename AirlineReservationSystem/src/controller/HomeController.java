@@ -12,15 +12,19 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import dao.*;
 import entities.*;
@@ -28,6 +32,8 @@ import entities.Class;
 import searchers.FligthSearcher;
 
 @Controller
+@SessionAttributes("currentUser")
+@RequestMapping("/")
 public class HomeController {
 
 	@Autowired
@@ -51,17 +57,26 @@ public class HomeController {
 	@Autowired
 	private FlightService flightService;
 	
-	  @ModelAttribute("User")
-	  public User setEmptyUser() {
-		  return null;
-	  }
+	@ModelAttribute("user")
+	public User adduser(@SessionAttribute(value="currentUser",required= false) User user){
+		return user;
+	}
+	
+	
 	
 	@RequestMapping("/")
-	public String frontPage(Model model){
+	public String frontPage(Model model/* ,@SessionAttribute("currentUser") User user */){
 		
+		//model.addAttribute("user",user);
+		BCrypt.hashpw("hej", BCrypt.gensalt(16));
 		return "frontPage";
 	}
 	
+	@ExceptionHandler(ServletRequestBindingException.class)
+	public String handle(Model model){
+		model.addAttribute("currentUser", null);
+		return "redirect:/login";
+	}
 	
 	@RequestMapping("/searchFlight")
 	public String getFlightSearchPage(Model model){

@@ -1,5 +1,6 @@
 package dao;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import entities.Pasazer;
@@ -25,7 +26,7 @@ public interface UserService {
 	
 	public Boolean registerUser(User user);
 	
-	public Boolean loginUser(User user,String password);
+	public Boolean loginUser(User user,String password) throws NoSuchAlgorithmException;
 	
 	public User getUserById(int id);
 	

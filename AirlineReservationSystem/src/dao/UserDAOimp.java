@@ -69,6 +69,9 @@ public class UserDAOimp implements UserDAO {
 		try {
 			Query<User> query = session.createQuery("from User where login=:login",User.class);
 			query.setParameter("login", login);
+			if(query.getResultList().isEmpty()) {
+				return null;
+			}
 			user = query.getSingleResult();
 		}catch(Exception e){
 			e.printStackTrace();

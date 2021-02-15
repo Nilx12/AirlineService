@@ -12,20 +12,18 @@
 
 <body>
 <c:if test="${user != null}">
-	<h4>Witaj ${user.getLogin()}</h4>
+	<h4>Witaj ${user.getFirstName()}</h4>
 </c:if>
 <c:if test="${user == null}">
 	<h4>zaloguj sie</h4>
 </c:if>
 	<div id="container">
-		<form:form action="getFlight"  modelAttribute="fligthSearcher" method="post">
+		<form:form action="processLogin"  modelAttribute="userToLoginr" method="post">
 		
-			Origin Airport: <form:input path="originAirport"/>
-			<form:errors path="originAirport" cssClass="error"/><br/>
-				Last name:  <form:input path="desitinyAirport"/>
-				<form:errors path="desitinyAirport" cssClass="error"/><br/>
-				<form:input path="time" maxlength="5"/>
-				<form:errors path="time" cssClass="error"/><br/>
+			Login: <form:input path="login"/>
+			<form:errors path="login" cssClass="error"/><br/>
+			Password:  <form:password path="password"/>
+			<form:errors path="password" cssClass="error"/><br/>
 		 	
 			<input type="submit" value="Save" />	
 		</form:form>
