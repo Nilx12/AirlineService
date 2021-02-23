@@ -14,5 +14,7 @@ public interface TicketDAO {
 	
 	public  List<Ticket> getTicketsByFlight(int id);
 	
+	public  List<Ticket> getTicketsByPassenger(int id);
+	
 	public void deleteTicket(int id);
 }

@@ -10,7 +10,7 @@
 
 <body>
 <c:if test="${user != null}">
-	<h4>Witaj ${user.getFirstName()}</h4>
+	<h4>Witaj ${user.getLogin()}</h4>
 </c:if>
 <c:if test="${user == null}">
 	<h4>zaloguj sie</h4>

@@ -60,13 +60,30 @@ public class TicketDAOimp implements TicketDAO {
 		}
 		return ticket;
 	}
+	
+	@Override
+	public  List<Ticket> getTicketsByPassenger(int id){
+		Session session = sessionFactory.getCurrentSession();
+		List<Ticket> tickets;
+		try {
+			Query<Ticket> query = session.createQuery("from Ticket where passanger_id=:pid",Ticket.class);
+			query.setParameter("pid", id);
+			tickets = query.getResultList();
+		}catch(Exception e){
+			e.printStackTrace();
+			tickets = null;
+		}
+		return tickets;
+		
+		
+	}
 
 	@Override
 	public  List<Ticket> getTicketsByFlight(int id){
 		Session session = sessionFactory.getCurrentSession();
 		List<Ticket> tickets;
 		try {
-			Query<Ticket> query = session.createQuery("from Ticket where flight_id=:fid",Ticket.class);
+			Query<Ticket> query = session.createQuery("SELECT ticket.* FROM airline_reservation_system.ticket INNER JOIN airline_reservation_system.passangers_on_flight ON ticket.id = passangers_on_flight.ticket_id where passangers_on_flight.passanger_id=:fid;",Ticket.class);
 			query.setParameter("fid", id);
 			tickets = query.getResultList();
 		}catch(Exception e){

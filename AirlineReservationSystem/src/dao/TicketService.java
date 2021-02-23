@@ -16,6 +16,8 @@ public interface TicketService {
 	
 	public  List<Ticket> getTicketsByFlight(int id);
 	
+	public  List<Ticket> getTicketsByPassenger(int id);
+	
 	public List<Flight> gFlist();
 	
 	public void sFlist(int id);

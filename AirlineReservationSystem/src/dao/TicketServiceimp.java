@@ -58,6 +58,8 @@ public class TicketServiceimp implements TicketService {
 	
 	@Override
 	public List<Pasazer> gPlist(){
+		
+		
 		return plist;
 		
 	}
@@ -88,6 +90,13 @@ public class TicketServiceimp implements TicketService {
 		return ticketDAO.getTicketsByFlight(id);
 	}
 
+	@Override
+	@Transactional
+	public List<Ticket> getTicketsByPassenger(int id) {
+		return ticketDAO.getTicketsByPassenger(id);
+	}
+
+	
 	@Override
 	@Transactional
 	public void deleteTicket(int id) {

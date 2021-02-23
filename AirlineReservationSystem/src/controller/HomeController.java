@@ -21,6 +21,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -57,6 +58,9 @@ public class HomeController {
 	@Autowired
 	private FlightService flightService;
 	
+	@Autowired
+	private TicketService ticketService;
+	
 	@ModelAttribute("user")
 	public User adduser(@SessionAttribute(value="currentUser",required= false) User user){
 		return user;
@@ -68,7 +72,6 @@ public class HomeController {
 	public String frontPage(Model model/* ,@SessionAttribute("currentUser") User user */){
 		
 		//model.addAttribute("user",user);
-		BCrypt.hashpw("hej", BCrypt.gensalt(16));
 		return "frontPage";
 	}
 	
@@ -117,6 +120,39 @@ public class HomeController {
 		model.addAttribute("flightClasses", fl);
 	
 		return "ticketPage";
+	}
+	
+	@GetMapping("/profile")
+	public String getProfile(Model model, @ModelAttribute("user") User user) {
+		
+		if(user == null) {
+			return "frontPage";
+		}
+		
+		List<Ticket> tickets = ticketService.getTicketsByPassenger(user.getId()) ;
+		if(tickets != null && !tickets.isEmpty()) {
+			model.addAttribute("ticket",tickets.get(tickets.size() - 1));
+		}else {
+			model.addAttribute("ticket",null);
+		}
+		return "profilePage";
+		
+	}
+	
+	
+	@GetMapping("/ticketHistory")
+	public String showTicketHistory(Model model, @ModelAttribute("user") User user) {
+		
+		if(user == null) {
+			return "redirect:/";
+		}
+		
+		List<Ticket> tickets = ticketService.getTicketsByPassenger(user.getId()) ;
+		if(tickets != null && !tickets.isEmpty()) {
+			model.addAttribute("tickets",tickets);
+		}
+		return "ticketList";
+		
 	}
 	
 }

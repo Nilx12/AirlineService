@@ -79,6 +79,23 @@ public class UserDAOimp implements UserDAO {
 		}
 		return user;
 	}
+	@Override
+	public User getUserByEmail(String email){
+		Session session = sessionFactory.getCurrentSession();
+		User user;
+		try {
+			Query<User> query = session.createQuery("from User where email=:email",User.class);
+			query.setParameter("email", email);
+			if(query.getResultList().isEmpty()) {
+				return null;
+			}
+			user = query.getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			user = null;
+		}
+		return user;
+	}
 	
 	@Override
 	public User getUserByPassenger(int id) {

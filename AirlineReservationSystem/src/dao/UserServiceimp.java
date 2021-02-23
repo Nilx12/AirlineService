@@ -127,6 +127,15 @@ public class UserServiceimp implements UserService {
 
 	@Override
 	@Transactional
+	public User getUserByEmail(String email) {
+		if(email == null || email.equals(""))
+			return null;
+		
+		return userDAO.getUserByEmail(email);
+	}
+	
+	@Override
+	@Transactional
 	public void deleteUser(int id) {
 		userDAO.deleteUser(id);
 
