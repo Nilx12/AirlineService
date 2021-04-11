@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import entities.Flight;
+import entities.FlightPassenger;
 import entities.Pasazer;
 import entities.Ticket;
 
@@ -14,7 +15,7 @@ public interface TicketService {
 	
 	public Ticket getTicketById(int id);
 	
-	public  List<Ticket> getTicketsByFlight(int id);
+	//public  List<Ticket> getTicketsByFlight(int id);
 	
 	public  List<Ticket> getTicketsByPassenger(int id);
 	
@@ -22,9 +23,11 @@ public interface TicketService {
 	
 	public void sFlist(int id);
 
-	public List<Pasazer> gPlist();
+	public List<FlightPassenger> gPlist();
 	
 	public void sPlist(int id);
+	
+	public  List<Ticket> getTicketsByEmail(String email);
 	
 	public void deleteTicket(int id);
 }

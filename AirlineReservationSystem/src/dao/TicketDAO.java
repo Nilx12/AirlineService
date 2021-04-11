@@ -12,9 +12,11 @@ public interface TicketDAO {
 	
 	public Ticket getTicketById(int id);
 	
-	public  List<Ticket> getTicketsByFlight(int id);
+	//public  List<Ticket> getTicketsByFlight(int id);
 	
 	public  List<Ticket> getTicketsByPassenger(int id);
+	
+	public  List<Ticket> getTicketsByEmail(String email);
 	
 	public void deleteTicket(int id);
 }

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -35,14 +36,8 @@ public class Pasazer {
 	@Column(name="email")
 	private String email;
 
-	@ManyToMany(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
-			CascadeType.DETACH,CascadeType.REFRESH})
-	@JoinTable(name="passangers_on_flight",
-			joinColumns=@JoinColumn(name="passanger_id"),
-			inverseJoinColumns=@JoinColumn(name="ticket_id")
-			)
-	private List<Ticket> tickets;
 	
+
 	
 	
 	public int getId() {
@@ -77,20 +72,6 @@ public class Pasazer {
 		this.email = email;
 	}
 
-	public List<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(List<Ticket> tickets) {
-		this.tickets = tickets;
-	}
-
-	public void addTicket(Ticket ticket) {
-		if(tickets == null) {
-			tickets= new ArrayList<Ticket>();
-		}
-		tickets.add(ticket);
-	}
 	
 	public Pasazer() {
 		

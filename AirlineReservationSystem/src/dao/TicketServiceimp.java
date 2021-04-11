@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import entities.Class;
 import entities.Flight;
+import entities.FlightPassenger;
 import entities.Pasazer;
 import entities.Ticket;
 
@@ -20,7 +21,7 @@ public class TicketServiceimp implements TicketService {
 
 	List<Flight> flist;
 	
-	List<Pasazer> plist;
+	List<FlightPassenger> plist;
 	
 	@Override
 	@Transactional
@@ -46,22 +47,27 @@ public class TicketServiceimp implements TicketService {
 	@Transactional
 	public void sPlist(int id) {
 		if(plist == null) {
-			plist = new ArrayList<Pasazer>();
+			plist = new ArrayList<FlightPassenger>();
 		}else {
 			flist.clear();
 		}
 		Ticket ticket = getTicketById(id);
-		for(Pasazer pas:ticket.getPassangers() ) {
+		for(FlightPassenger pas:ticket.getPassangers() ) {
 			plist.add(pas);
 		}
 	}
 	
 	@Override
-	public List<Pasazer> gPlist(){
+	public List<FlightPassenger> gPlist(){
 		
 		
 		return plist;
 		
+	}
+	@Override
+	@Transactional
+	public  List<Ticket> getTicketsByEmail(String email){
+		return ticketDAO.getTicketsByEmail(email);
 	}
 	
 	@Override
@@ -84,11 +90,12 @@ public class TicketServiceimp implements TicketService {
 		return ticketDAO.getTicketById(id);
 	}
 
-	@Override
-	@Transactional
-	public List<Ticket> getTicketsByFlight(int id) {
-		return ticketDAO.getTicketsByFlight(id);
-	}
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public List<Ticket> getTicketsByFlight(int id) { return
+	 * ticketDAO.getTicketsByFlight(id); }
+	 */
 
 	@Override
 	@Transactional

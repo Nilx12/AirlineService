@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -40,13 +41,27 @@ public class Ticket {
 	@JoinColumn(name="price_id")
 	private Price price;
 	
+	@OneToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,
+			CascadeType.DETACH,CascadeType.REFRESH})
+	@JoinColumn(name="status_id")
+	private TicketStatus status;
+	
+	@Column(name="accepted")
+	boolean accepted;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="price")
+	private int priceVal;
+	
 	@ManyToMany(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
 			CascadeType.DETACH,CascadeType.REFRESH})
 	@JoinTable(name="passangers_on_flight",
 			joinColumns=@JoinColumn(name="ticket_id"),
 			inverseJoinColumns=@JoinColumn(name="passanger_id")
 			)
-	private List<Pasazer> passangers;
+	private List<FlightPassenger> passangers;
 
 	@ManyToMany(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
 			CascadeType.DETACH,CascadeType.REFRESH})
@@ -88,17 +103,17 @@ public class Ticket {
 		this.price = price;
 	}
 
-	public List<Pasazer> getPassangers() {
+	public List<FlightPassenger> getPassangers() {
 		return passangers;
 	}
 
-	public void setPassangers(List<Pasazer> passangers) {
+	public void setPassangers(List<FlightPassenger> passangers) {
 		this.passangers = passangers;
 	}
 
-	public void addPassanger(Pasazer pasazer) {
+	public void addPassanger(FlightPassenger pasazer) {
 		if(passangers == null) {
-			passangers= new ArrayList<Pasazer>();
+			passangers= new ArrayList<FlightPassenger>();
 		}
 		passangers.add(pasazer);
 	}
@@ -118,14 +133,55 @@ public class Ticket {
 		flights.add(flight);
 	}
 	
+	public List<Flight> getFlights() {
+		return flights;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getPriceVal() {
+		return priceVal;
+	}
+
+	public void setPriceVal(int priceVal) {
+		this.priceVal = priceVal;
+	}
+
+	
+	
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
+	}
+	
+	public TicketStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(TicketStatus status) {
+		this.status = status;
+	}
+
 	public Ticket() {
 		
 	}
-
-	public Ticket(Class fligthClass, Discount discount, Price price) {
+	
+	public Ticket(Class fligthClass, Discount discount, Price price,String email, int priceVal,TicketStatus status) {
 		this.fligthClass = fligthClass;
 		this.discount = discount;
 		this.price = price;
+		this.email = email;
+		this.priceVal = priceVal;
+		this.status = status;
 	}
 	
 	

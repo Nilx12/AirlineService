@@ -25,7 +25,7 @@
 				<td>${flight.originAirport.getName()}</td>
 				<td>${flight.desitinyAirport.getName()}</td>
 				<td>${flight.plane.getModel().getManufacturer().getName()} ${flight.plane.getModel().getModel()}</td>
-				<td><a href="${kup}">kup</a> </td>
+				<td><a href="buyTicket/${fligthId}">Go to shop</a> </td>
 			</tr>
 		</c:forEach> 
 		</table>

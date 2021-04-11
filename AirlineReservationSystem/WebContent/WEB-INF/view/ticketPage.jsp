@@ -1,3 +1,4 @@
+<%@ taglib prefix="form"  uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -14,6 +15,18 @@
 </head>
 
 <body>
+	<c:choose>
+		<c:when test="${user != null}">
+			<c:set var = "name" value ="${user.getPasazer().getFirstName()}" />
+			<c:set var = "surname" value ="${user.getPasazer().getLastName()}" />
+			<c:set var = "email" value ="${user.getEmail()}" />
+		</c:when>
+		<c:otherwise>
+			<c:set var = "name" value ="" />
+			<c:set var = "surname" value ="" />
+			<c:set var = "email" value ="" />
+		</c:otherwise>
+	</c:choose>
 	<div>Airline :${flight.airline.getName()}</div>
 	<div>from :${flight.originAirport.getName()}</div>
 	<div>to: ${flight.desitinyAirport.getName()}</div>
@@ -22,11 +35,27 @@
 	<div>second Pilot: ${flight.crew.getFlightAttendant().getFirstName()} ${flight.crew.getFlightAttendant().getLastName()}</div>
 	<br>
 	<div>
-	<c:forEach var="klass" items="${flightClasses}">
-		<ul>
-			<li>${klass.name}</li>
-		</ul>
-	</c:forEach>
+	<form:form action="ticketShop"  modelAttribute="ticketPropjyerty" method="post">
+		<form:select path="flighClass">
+				<form:options items = "${flightClasses}" itemLabel="name" itemValue="id" ></form:options>
+		</form:select>
+		<form:select path="discountId">
+				<form:options items = "${discounts}" itemLabel="type" itemValue="id" ></form:options>
+		</form:select>
+		name: <form:input path="name" value="${name}"/>
+		<form:errors path="name" cssClass="error"/><br/> 
+		surname:  <form:input path="surname"  value="${surname}"/>
+		<form:errors path="surname" cssClass="error"/><br/>
+		surname:  <form:input path="email"  value="${email}"/>
+		<form:errors path="email" cssClass="error"/><br/>
+		
+		
+		<form:select path="seatId">
+			<form:options items = "${avaiableSeats}" itemLabel="name" itemValue="id" ></form:options>
+		</form:select>
+		
+		
+	</form:form>
 	</div>
 	<a href="${pageContext.request.contextPath}/searchFlight">Back to front</a>
 </body>

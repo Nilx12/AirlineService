@@ -29,13 +29,9 @@ public class Class {
 	@Column(name="meal")
 	private boolean meal;
 
-	@ManyToMany(fetch=FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,
-			CascadeType.DETACH,CascadeType.REFRESH})
-	@JoinTable(name="operated_classes",
-			joinColumns=@JoinColumn(name="class_id"),
-			inverseJoinColumns=@JoinColumn(name="flight_id")
-			)
-	private List<Flight> flights;
+	/*
+	 * @ManyToMany(mappedBy="classes") private List<Flight> flights;
+	 */
 	
 	public int getId() {
 		return id;
@@ -62,13 +58,11 @@ public class Class {
 	}
 
 
-	public List<Flight> getFlights() {
-		return flights;
-	}
-
-	public void setFlights(List<Flight> flights) {
-		this.flights = flights;
-	}
+	/*
+	 * public List<Flight> getFlights() { return flights; }
+	 * 
+	 * public void setFlights(List<Flight> flights) { this.flights = flights; }
+	 */
 
 	public Class() {
 

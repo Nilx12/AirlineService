@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,7 @@ public class UserController {
 		}
 		
 		if(userService.loginUser(user, userLoginOverseerr.getPassword())) {
+		
 			model.addAttribute("currentUser", user);
 			return "redirect:/";
 		}else {
@@ -102,4 +104,5 @@ public class UserController {
 		return "emailSendMessage";
 		
 	}
+	
 }
